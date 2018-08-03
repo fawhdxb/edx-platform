@@ -1298,6 +1298,9 @@ MIDDLEWARE_CLASSES = [
 
     'edx_rest_framework_extensions.middleware.EnsureJWTAuthSettingsMiddleware',
 
+    # Outputs monitoring metrics for a request
+    'edx_rest_framework_extensions.middleware.RequestMetricsMiddleware',
+
     # This must be last
     'openedx.core.djangoapps.site_configuration.middleware.SessionCookieDomainOverrideMiddleware',
 ]
