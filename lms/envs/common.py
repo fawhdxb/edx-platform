@@ -1298,7 +1298,10 @@ MIDDLEWARE_CLASSES = [
 
     'edx_rest_framework_extensions.middleware.EnsureJWTAuthSettingsMiddleware',
 
-    # Outputs monitoring metrics for a request
+    # Clears cache as appropriate.
+    'edx_django_utils.cache.middleware.CacheUtilsMiddleware',
+
+    # Outputs monitoring metrics for a request.
     'edx_rest_framework_extensions.middleware.RequestMetricsMiddleware',
 
     # This must be last
