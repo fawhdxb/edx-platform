@@ -247,6 +247,7 @@ class LibTestSuite(PytestSuite):
         self.test_id = kwargs.get('test_id', self.root)
         self.eval_attr = kwargs.get('eval_attr', None)
         self.xdist_ip_addresses = kwargs.get('xdist_ip_addresses', None)
+        self.randomize = kwargs.get('randomize', None)
         self.processes = kwargs.get('processes', None)
 
         if self.processes is None:
@@ -266,8 +267,6 @@ class LibTestSuite(PytestSuite):
             '-Wd',
             '-m',
             'pytest',
-            '-p',
-            'no:randomly',
             '--junitxml={}'.format(self.xunit_report),
         ])
         cmd.extend(self.passthrough_options + self.test_options_flags)
@@ -305,6 +304,8 @@ class LibTestSuite(PytestSuite):
                 cmd.append('-n {}'.format(self.processes))
                 cmd.append('--dist=loadscope')
 
+        if not self.randomize:
+            cmd.append("-p no:randomly")
         if self.eval_attr:
             cmd.append("-a '{}'".format(self.eval_attr))
 

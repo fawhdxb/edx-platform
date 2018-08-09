@@ -162,7 +162,8 @@ def test_system(options, passthrough_options):
         dest='xdist_ip_addresses',
         help="Comma separated string of ip addresses to shard tests to via xdist."
     ),
-    make_option('-p', '--processes', dest='processes', default=0, help='number of processes to use running tests')
+    make_option('-p', '--processes', dest='processes', default=0, help='number of processes to use running tests'),
+    make_option('-r', '--randomize', action='store_true', help='run the tests in a random order'),
 ], share_with=['pavelib.utils.test.utils.clean_reports_dir'])
 @PassthroughTask
 @timed
