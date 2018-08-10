@@ -25,10 +25,10 @@ class TestPaverPytestCmd(unittest.TestCase):
         Returns the command that is expected to be run for the given test spec
         and store.
         """
-        report_dir = Env.REPORT_DIR
+        report_dir = Env.REPORT_DIR / root
         shard = os.environ.get('SHARD')
         if shard:
-            report_dir = report_dir / '/shard_' + shard
+            report_dir = report_dir / 'shard_' + shard
 
         expected_statement = [
             "python",
@@ -38,7 +38,7 @@ class TestPaverPytestCmd(unittest.TestCase):
         ]
         if pytestSubclass == "SystemTestSuite":
             expected_statement.append("--ds={}".format('{}.envs.{}'.format(root, Env.TEST_SETTINGS)))
-        expected_statement.append("--junitxml={}".format(report_dir / root / "nosetests.xml"))
+        expected_statement.append("--junitxml={}".format(report_dir / "nosetests.xml"))
 
         if xdist_ip_addresses:
             expected_statement.append('--dist=loadscope')
